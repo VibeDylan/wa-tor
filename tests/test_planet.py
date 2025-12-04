@@ -1,5 +1,6 @@
 from src.wator.planet import Planet
 from src.wator.fish import Fish
+from src.wator.shark import Shark
 
 class TestPlanetInitialisation:
     def test_grid_dimensions(self):
@@ -112,6 +113,21 @@ class TestPlanetMove:
         assert result == False
         assert planet.get(1 , 1) is fish
         assert planet.get(1, 2) is fish2
+        
+    def test_shark_eats_fish(self):
+        planet = Planet(5,5)
+        shark = Shark(1, 1, age=0)
+        fish = Fish(1, 2)
+        
+        planet.set(1, 1, shark)
+        planet.set(1, 2, fish)
+        
+        result = planet.move(1, 1, 1, 2)
+        
+        assert result == True
+        assert planet.get(1 ,1) is None
+        assert planet.get(1, 2) is shark
+        assert planet.get(1, 2) is not fish
          
         
     
