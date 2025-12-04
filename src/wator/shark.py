@@ -2,8 +2,7 @@ import random
 from planet import Planet
 
 class Shark:
-    def __init__(self, id: int, x: int, y:int, reproduction_time: int=5, energy: int=10, age: int=0):
-        self.id = id
+    def __init__(self, x: int, y:int, reproduction_time: int=5, energy: int=10, age: int=0):
         self.x = x
         self.y = y
         self.age = age
@@ -16,7 +15,7 @@ class Shark:
 
     def reproduce(self, planet: Planet, old_position: tuple[int, int]) -> None:
         if self.age % self.reproduction_time == 0:
-            baby_shark = Shark(id=2, x=old_position[0], y=old_position[1])
+            baby_shark = Shark(x=old_position[0], y=old_position[1])
             planet.add(baby_shark, baby_shark.x, baby_shark.y)
 
     def change_position(self, planet: Planet, new_position:tuple[int, int], eating: bool) -> None:
