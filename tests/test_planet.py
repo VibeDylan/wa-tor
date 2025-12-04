@@ -1,4 +1,5 @@
 from src.wator.planet import Planet
+from src.wator.fish import Fish
 
 class TestPlanetInitialisation():
     def test_grid_dimensions(self):
@@ -27,3 +28,20 @@ class TestPlanetWrap():
         result = planet.wrap(3, 2)
         
         assert(result == (3,2))
+        
+class TestPlanetIsFree():
+    def test_empty_cell_is_free(self):
+        planet = Planet(5, 5)
+        
+        result = planet.is_free(2, 3)
+        
+        assert(result == True)
+        
+    def test_occupied_cell_is_not_free(self):
+        planet = Planet(5,5)
+        fish = Fish(1, 2)
+        planet.set(1, 2, fish)
+        
+        result = planet.is_free(1, 2)
+        
+        assert(result == False)
