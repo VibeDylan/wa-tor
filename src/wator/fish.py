@@ -31,8 +31,8 @@ class Fish:
 
     def reproduce(self, planet: Planet, old_position: tuple[int, int]) -> None:
         if self.age > 0 and self.age % self.reproduction_time == 0:
-            baby_shark = Shark(x=old_position[0], y=old_position[1])
-            planet.add(baby_shark, baby_shark.x, baby_shark.y)
+            baby_fish = Fish(x=old_position[0], y=old_position[1])
+            planet.add(baby_fish, baby_fish.x, baby_fish.y)
 
 
     def __str__(self):
