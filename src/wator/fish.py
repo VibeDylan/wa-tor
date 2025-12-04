@@ -1,4 +1,6 @@
 import random
+from .planet import Planet
+
 
 class Fish:
     def __init__(self, x, y, age=0, reproduction_time=3):
@@ -7,13 +9,13 @@ class Fish:
         self.age = age
         self.reproduction_time = reproduction_time
 
-    def ask_direction(self, planet: 'Planet') -> tuple[int, int]: 
+    def ask_direction(self, planet: Planet) -> tuple[int, int]: 
         free_cells = planet.free_neighbors(self.x, self.y)
         if free_cells:
             return random.choice(free_cells)
         return None
 
-    def move(self, planet: 'Planet'):
+    def move(self, planet: Planet):
         new_position = self.ask_direction(planet)
         if new_position:
             new_x, new_y = new_position
@@ -21,7 +23,7 @@ class Fish:
             if moved:
                 self.x, self.y = new_x, new_y
 
-    def reproduce(self, planet: 'Planet') -> 'Fish': 
+    def reproduce(self, planet: Planet): 
         self.age += 1
         if self.age >= self.reproduction_time:
             free_cells = planet.free_neighbors(self.x, self.y)
