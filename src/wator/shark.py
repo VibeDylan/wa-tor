@@ -13,6 +13,10 @@ class Shark:
         self.age += 1
         self.energy += energy
 
+    def is_alive(self) -> bool:
+        """Vérifie si le requin est vivant. Un requin meurt si son énergie est <= 0."""
+        return self.energy > 0
+
     def reproduce(self, planet: Planet, old_position: tuple[int, int]) -> None:
         if self.age > 0 and self.age % self.reproduction_time == 0:
             baby_shark = Shark(x=old_position[0], y=old_position[1])

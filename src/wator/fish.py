@@ -35,5 +35,8 @@ class Fish:
                 return baby_fish
         return None
 
+    def is_alive(self) -> bool:
+        return True
+
     def __str__(self):
         return f"Fish(x={self.x}, y={self.y}, age={self.age})"
