@@ -13,7 +13,7 @@ class Planet:
         return self._grid[x][y]
     
     def set(self, x: int, y: int, entity: object) -> None:
-        self._grid[y][x] = entity
+        self._grid[x][y] = entity
        
     def wrap(self, x: int, y: int) -> tuple[int, int]: 
         return x % self.width, y % self.height
