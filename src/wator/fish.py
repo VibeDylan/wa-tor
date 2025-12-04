@@ -9,7 +9,7 @@ class Fish:
         self.age = age
         self.reproduction_time = reproduction_time
 
-    def ask_direction(self, planet: Planet) -> tuple[int, int]: 
+    def ask_direction(self, planet: Planet) -> tuple[int, int] | None: 
         free_cells = planet.free_neighbors(self.x, self.y)
         if free_cells:
             return random.choice(free_cells)
