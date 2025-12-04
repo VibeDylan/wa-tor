@@ -86,5 +86,33 @@ class TestPlanetFreeNeighbors:
         result = planet.free_neighbors(2, 2)
         assert result == []
         
+class TestPlanetMove:
+    def test_move_into_empty_cell(self):
+        planet = Planet(5, 5)
+        fish = Fish(1, 1)
+        
+        planet.set(1, 1, fish)
+        
+        result = planet.move(1 , 1, 2, 2)
+        
+        assert result == True
+        assert planet.get(1 , 1) is None
+        assert planet.get(2, 2) is fish
+        
+    def test_move_into_occupied_cell_by_fish(self):
+        planet = Planet(5, 5)
+        fish = Fish(1, 1)
+        fish2 = Fish(1, 2)
+        
+        planet.set(1, 1, fish)
+        planet.set(1, 2, fish2)
+        
+        result = planet.move(1,1, 1, 2)
+        
+        assert result == False
+        assert planet.get(1 , 1) is fish
+        assert planet.get(1, 2) is fish2
+         
+        
     
         
