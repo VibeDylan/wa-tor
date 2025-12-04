@@ -14,7 +14,7 @@ class Shark:
         self.energy += energy
 
     def reproduce(self, planet: Planet, old_position: tuple[int, int]) -> None:
-        if self.age % self.reproduction_time == 0:
+        if self.age > 0 and self.age % self.reproduction_time == 0:
             baby_shark = Shark(x=old_position[0], y=old_position[1])
             planet.add(baby_shark, baby_shark.x, baby_shark.y)
 
@@ -27,8 +27,7 @@ class Shark:
             self.x = new_position[0]
             self.y = new_position[1]
             self.reproduce(planet, old_position)
-        else:
-            self.ask_direction(planet)
+        # Si le mouvement n'est pas autorisé, le requin reste sur place et perd de l'énergie
 
     def move(self, planet: Planet, new_position: tuple[int, int]) -> None:
         eating = False

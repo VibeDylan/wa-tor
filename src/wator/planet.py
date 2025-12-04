@@ -10,7 +10,7 @@ class Planet:
         ]
         
     def get(self, x: int, y: int):
-        return self._grid[x][y]
+        return self._grid[y][x]
     
     def set(self, x: int, y: int, entity: object) -> None:
         self._grid[y][x] = entity
@@ -36,7 +36,7 @@ class Planet:
 
     def fish_neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
         return [(nx, ny) for nx, ny in self.neighbors(x, y)
-                if self.get(nx, ny).__class__.__name__ == "Fish"]
+                if self.get(nx, ny) and self.get(nx, ny).__class__.__name__ == "Fish"]
     
 
     def move(self, old_x: int, old_y: int, new_x: int, new_y: int) -> bool:
