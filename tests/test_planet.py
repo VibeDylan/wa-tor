@@ -1,7 +1,7 @@
 from src.wator.planet import Planet
 from src.wator.fish import Fish
 
-class TestPlanetInitialisation():
+class TestPlanetInitialisation:
     def test_grid_dimensions(self):
         planet = Planet(width=5, height=5)
         grid = planet._grid
@@ -9,33 +9,33 @@ class TestPlanetInitialisation():
         assert len(grid) == 5, "La grille doit avoir 5 lignes"
         assert len(grid[0]) == 5, "Chaque ligne doit avoir 5 colonnes"
         
-class TestPlanetWrap():
+class TestPlanetWrap:
     def test_wrap_negative(self):
         planet = Planet(5, 5)
         
         result = planet.wrap(-1, 2)
-        assert(result == (4, 2))
+        assert result == (4, 2)
         
     def test_wrap_overflow(self):
         planet = Planet(5, 5)
         result = planet.wrap(5, 3)
         
-        assert(result == (0, 3))
+        assert result == (0, 3)
         
     def test_wrap_inside_bounds(self):
         planet = Planet(5,5)
         
         result = planet.wrap(3, 2)
         
-        assert(result == (3,2))
+        assert result == (3,2)
         
-class TestPlanetIsFree():
+class TestPlanetIsFree:
     def test_empty_cell_is_free(self):
         planet = Planet(5, 5)
         
         result = planet.is_free(2, 3)
         
-        assert(result == True)
+        assert result == True
         
     def test_occupied_cell_is_not_free(self):
         planet = Planet(5,5)
@@ -44,4 +44,4 @@ class TestPlanetIsFree():
         
         result = planet.is_free(1, 2)
         
-        assert(result == False)
+        assert result == False
