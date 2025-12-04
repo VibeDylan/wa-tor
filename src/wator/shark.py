@@ -22,7 +22,7 @@ class Shark(Fish):
     def search_fish(self, planet: Planet) -> None:
         adjacent_fishes = planet.fish_neighbors(self.x, self.y)
         if len(adjacent_fishes) == 1:
-            self.eat(planet, adjacent_fishes[0])
+            self.eat(adjacent_fishes[0])
         elif len(adjacent_fishes) > 1:
             self.eat(planet, random.choice(adjacent_fishes))
         else:
