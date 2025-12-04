@@ -12,7 +12,7 @@ class Planet:
     def get(self, x: int, y: int):
         return self._grid[x][y]
     
-    def set(self, x: int, y: int, entity) -> None:
+    def set(self, x: int, y: int, entity: object) -> None:
         self._grid[y][x] = entity
        
     def wrap(self, x: int, y: int) -> tuple[int, int]: 
@@ -44,6 +44,7 @@ class Planet:
         if entity is None:
             return False
 
+        
         if self.is_free(new_x, new_y):
             self.set(new_x, new_y, entity)
             self.set(old_x, old_y, None)
@@ -51,7 +52,8 @@ class Planet:
 
         if entity.__class__.__name__ == "Shark":
             target = self.get(new_x, new_y)
-            if target.__class__.__name__ == "Fish":
+            if target and target.__class__.__name__ == "Fish":
+                self.remove(new_x, new_y)  
                 self.set(new_x, new_y, entity)
                 self.set(old_x, old_y, None)
                 return True
