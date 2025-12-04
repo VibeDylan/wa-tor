@@ -1,4 +1,5 @@
 class Planet:
+    
     def __init__(self, width: int, height: int):
         self.width = width
         self.height = height
@@ -38,7 +39,6 @@ class Planet:
                 if self.get(nx, ny).__class__.__name__ == "Fish"]
     
 
-
     def move(self, old_x: int, old_y: int, new_x: int, new_y: int) -> bool:
         entity = self.get(old_x, old_y)
         if entity is None:
@@ -55,7 +55,6 @@ class Planet:
                 self.set(new_x, new_y, entity)
                 self.set(old_x, old_y, None)
                 return True
-
         return False
 
 
