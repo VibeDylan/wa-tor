@@ -14,7 +14,6 @@ class Shark:
         self.energy += energy
 
     def is_alive(self) -> bool:
-        """Vérifie si le requin est vivant. Un requin meurt si son énergie est <= 0."""
         return self.energy > 0
 
     def reproduce(self, planet: Planet, old_position: tuple[int, int]) -> None:
@@ -30,8 +29,11 @@ class Shark:
             self.update_stats(energy)
             self.x = new_position[0]
             self.y = new_position[1]
+            if not self.is_alive():
+                planet.remove(self.x, self.y)
+                return
             self.reproduce(planet, old_position)
-        # Si le mouvement n'est pas autorisé, le requin reste sur place et perd de l'énergie
+            
 
     def move(self, planet: Planet, new_position: tuple[int, int]) -> None:
         eating = False
@@ -61,3 +63,5 @@ class Shark:
                 self.move(planet, adjacent_free[free_random])
             else:
                 self.update_stats(-1)
+                if not self.is_alive():
+                    planet.remove(self.x, self.y)
