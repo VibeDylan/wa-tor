@@ -16,16 +16,16 @@ class Shark(Fish):
             self.energy += 3
 
     def check_if_dead(self, planet: Planet) -> None:
-        if self.energy == 0:
+        if self.energy <= 0:
             planet.remove(self.x, self.y)
 
     def search_fish(self, planet: Planet) -> None:
         adjacent_fishes = planet.fish_neighbors(self.x, self.y)
         if len(adjacent_fishes) == 1:
-            self.eat(adjacent_fishes[0])
+            self.eat(planet, adjacent_fishes[0])
         elif len(adjacent_fishes) > 1:
             self.eat(planet, random.choice(adjacent_fishes))
         else:
             self.ask_direction(planet)
             self.energy -= 1
-            self.check_if_dead()
+            self.check_if_dead(planet)

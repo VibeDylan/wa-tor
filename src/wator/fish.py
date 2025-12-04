@@ -24,14 +24,13 @@ class Fish:
         free_cells = planet.free_neighbors(self.x, self.y)
         if free_cells:
             free_random = random.choice(free_cells)
-            print(free_random)
             self.move(planet, free_random)
         self.age += 1
 
 
     def reproduce(self, planet: Planet, old_position: tuple[int, int]) -> None:
         if self.age > 0 and self.age % self.reproduction_time == 0:
-            baby_fish = Fish(x=old_position[0], y=old_position[1])
+            baby_fish = Fish(x=old_position[0], y=old_position[1], age=0, reproduction_time=self.reproduction_time)
             planet.add(baby_fish, baby_fish.x, baby_fish.y)
 
 
