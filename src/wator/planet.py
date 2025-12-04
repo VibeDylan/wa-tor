@@ -52,7 +52,6 @@ class Planet:
         if entity is None:
             return False
 
-        # 👉 Déplacement normal
         if self.is_free(new_x, new_y):
             self.set(new_x, new_y, entity)
             self.set(old_x, old_y, None)

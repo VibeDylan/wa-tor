@@ -128,7 +128,3 @@ class TestPlanetMove:
         assert planet.get(1 ,1) is None
         assert planet.get(1, 2) is shark
         assert planet.get(1, 2) is not fish
-         
-        
-    
-        
