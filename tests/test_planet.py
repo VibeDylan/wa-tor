@@ -76,5 +76,15 @@ class TestPlanetFreeNeighbors:
         result = planet.free_neighbors(2, 2)
         assert result == [(2, 3), (1, 2), (3,2)]
         
+    def test_no_free_neighbors(self):
+        planet = Planet(5,5)
+        planet.set(2,1, Fish(2,1))
+        planet.set(2,3, Fish(2,3))
+        planet.set(1,2, Fish(1,2))
+        planet.set(3,2, Fish(3,2))
+        
+        result = planet.free_neighbors(2, 2)
+        assert result == []
+        
     
         
