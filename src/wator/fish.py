@@ -23,8 +23,12 @@ class Fish:
             self.x = new_position[0]
             self.y = new_position[1]
             self.reproduce(planet, old_position)
+<<<<<<< HEAD
         else:
             self.ask_direction(planet)
+=======
+        else: self.ask_direction(planet)
+>>>>>>> e9c4c09 (add test about plnate neighbors)
 
 
     def ask_direction(self, planet: 'Planet')  -> None:
