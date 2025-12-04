@@ -45,3 +45,19 @@ class TestPlanetIsFree:
         result = planet.is_free(1, 2)
         
         assert result == False
+        
+class TestPlanetNeighbors:
+    def test_neighbors_center(self):
+        planet = Planet(5, 5)
+
+        result = planet.neighbors(2, 2)
+        assert result == [(2, 1), (2, 3), (1, 2), (3,2)]
+        
+    def test_neighbors_with_wrap(self):
+        planet = Planet(5,5)
+        
+        result = planet.neighbors(0, 0)
+        assert result == [(0, 4), (0, 1), (4, 0), (1, 0)]
+        
+    
+        
