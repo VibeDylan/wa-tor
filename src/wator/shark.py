@@ -1,7 +1,11 @@
 from __future__ import annotations
 
 import random
+from typing import TYPE_CHECKING
 from .fish import Fish
+
+if TYPE_CHECKING:
+    from .planet import Planet
 
 class Shark(Fish):
     def __init__(self, x: int, y: int, reproduction_time: int=5, energy: int=10):
