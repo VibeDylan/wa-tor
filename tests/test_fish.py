@@ -51,3 +51,5 @@ class TestFishAskDirection:
         direction = fish.ask_direction(planet)
         assert fish.x == 5
         assert fish.y == 5
+        
+        assert fish.age == 1
