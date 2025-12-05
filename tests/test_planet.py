@@ -116,7 +116,7 @@ class TestPlanetMove:
         
     def test_shark_eats_fish(self):
         planet = Planet(5,5)
-        shark = Shark(1, 1, age=0)
+        shark = Shark(1, 1)
         fish = Fish(1, 2)
         
         planet.set(1, 1, shark)

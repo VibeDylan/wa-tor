@@ -39,4 +39,4 @@ class TestFishAskDirection:
         assert planet.get(2 ,2) is None
         assert planet.get(2, 3) is fish
         
-        assert fish.age == 1
+        assert fish.age == 2
