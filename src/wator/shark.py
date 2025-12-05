@@ -32,7 +32,7 @@ class Shark(Fish):
     def search_fish(self, planet: 'Planet') -> None:
         adjacent_fishes = planet.fish_neighbors(self.x, self.y)
         if adjacent_fishes:
-            self.move(planet, random.choice(adjacent_fishes))
+            self.eat(planet, random.choice(adjacent_fishes))
         else:
             self.ask_direction(planet)
             self.energy -= 1
