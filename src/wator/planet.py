@@ -1,9 +1,10 @@
-from typing import Union 
-from fish import Fish
-from shark import Shark
+from __future__ import annotations
 
-class Planet:
-    
+from typing import Union
+from .fish import Fish
+from .shark import Shark
+
+class Planet:    
     def __init__(self, width: int, height: int):
         self.width = width
         self.height = height

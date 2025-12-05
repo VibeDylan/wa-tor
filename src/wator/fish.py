@@ -1,5 +1,10 @@
+from __future__ import annotations
+
 import random
-from .planet import Planet
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .planet import Planet
 
 
 class Fish:
@@ -10,7 +15,7 @@ class Fish:
         self.reproduction_time = reproduction_time
 
 
-    def move(self, planet: Planet, new_position: tuple[int, int]) -> None:
+    def move(self, planet: 'Planet', new_position: tuple[int, int]) -> None:
         old_position = (self.x, self.y)
         move_allowed = planet.move(self.x, self.y, new_position[0], new_position[1])
         if move_allowed:
@@ -18,10 +23,11 @@ class Fish:
             self.x = new_position[0]
             self.y = new_position[1]
             self.reproduce(planet, old_position)
-        else: ask_direction(planet)
+        else:
+            self.ask_direction(planet)
 
 
-    def ask_direction(self, planet: Planet)  -> None:
+    def ask_direction(self, planet: 'Planet')  -> None:
         free_cells = planet.free_neighbors(self.x, self.y)
         if free_cells:
             free_random = random.choice(free_cells)
@@ -30,7 +36,7 @@ class Fish:
         self.age += 1
 
 
-    def reproduce(self, planet: Planet, old_position: tuple[int, int]) -> None:
+    def reproduce(self, planet: 'Planet', old_position: tuple[int, int]) -> None:
         if self.age > 0 and self.age % self.reproduction_time == 0:
             baby_fish = Fish(x=old_position[0], y=old_position[1])
             planet.add(baby_fish, baby_fish.x, baby_fish.y)
