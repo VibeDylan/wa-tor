@@ -53,3 +53,7 @@ class TestFishAskDirection:
         assert fish.y == 5
         
         assert fish.age == 1
+
+class TestFishReproduce:
+    def test_no_reproduction_before_time(self)
+        planet = Planet(5, 5)
