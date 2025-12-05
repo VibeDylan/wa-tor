@@ -45,6 +45,7 @@ class TestPlanetIsFree:
         
         result = planet.is_free(1, 2)
         
+<<<<<<< HEAD
         assert result == False
         
 class TestPlanetNeighbors:
