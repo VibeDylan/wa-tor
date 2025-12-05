@@ -52,7 +52,6 @@ class Planet:
         if entity is None:
             return False
 
-        # 👉 IMPORTANT : wrap de la nouvelle position
         new_x, new_y = self.wrap(new_x, new_y)
 
         # Déplacement normal
@@ -64,7 +63,6 @@ class Planet:
             entity.y = new_y
             return True
 
-        # Shark mange un poisson
         if isinstance(entity, Shark):
             target = self.get(new_x, new_y)
             if isinstance(target, Fish):
