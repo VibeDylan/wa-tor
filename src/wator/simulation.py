@@ -52,6 +52,43 @@ class Simulation():
                     line += "🦈 "
             print(line)
         print()
+        
+    def step(self):
+        snapshot = []
+        for y in range(self.height):
+            for x in range(self.width):
+                entity = self.planet.get(x, y)
+                if entity is not None:
+                    snapshot.append((entity, x, y))
+                    
+        for y in range(self.height):
+            for x in range(self.width):
+                entity = self.planet.get(x, y)
+                if entity is not None:
+                    entity.has_moved = False
 
-    
+        for entity, x, y in snapshot:
+            if isinstance(entity, Fish):
+                entity.step(self.planet)
 
+        for entity, x, y in snapshot:
+            if isinstance(entity, Shark):
+                entity.step(self.planet)
+
+        for y in range(self.height):
+            for x in range(self.width):
+                entity = self.planet.get(x, y)
+                if isinstance(entity, Shark) and entity.energy <= 0:
+                    self.planet.remove(x, y)
+
+        self.turn += 1
+
+
+sim = Simulation(10, 10, 5, 2)
+for _ in range(10):
+    sim.display()
+    print()
+    print("----------")
+    print()
+
+    sim.step()
