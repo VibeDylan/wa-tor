@@ -3,8 +3,8 @@ from .planet import Planet
 from .fish import Fish
 
 class Shark(Fish):
-    def __init__(self, x, y, age, reproduction_time: int=5, energy: int=10):
-        super().__init__(x, y, age)
+    def __init__(self, x: int, y: int, reproduction_time: int=5, energy: int=10):
+        super().__init__(x, y, age=0)
         self.reproduction_time = reproduction_time
         self.energy = energy
 
