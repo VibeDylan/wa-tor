@@ -13,9 +13,9 @@ class Fish:
         self.y = y
         self.age = age
         self.reproduction_time = reproduction_time
+    
 
-
-    def move(self, planet: 'Planet', new_position: tuple[int, int]) -> None:
+    def _move(self, planet: 'Planet', new_position: tuple[int, int]) -> None:
         old_position = (self.x, self.y)
         move_allowed = planet.move(self.x, self.y, new_position[0], new_position[1])
         if move_allowed:
@@ -38,8 +38,10 @@ class Fish:
 
     def reproduce(self, planet: 'Planet', old_position: tuple[int, int]) -> None:
         if self.age > 0 and self.age % self.reproduction_time == 0:
+            self.age == self.reproduction_time
             baby_fish = Fish(x=old_position[0], y=old_position[1])
             planet.add(baby_fish, baby_fish.x, baby_fish.y)
+
 
 
     def __str__(self):
