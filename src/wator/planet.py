@@ -1,18 +1,22 @@
+from typing import Union 
+from fish import Fish
+from shark import Shark
+
 class Planet:
     
     def __init__(self, width: int, height: int):
         self.width = width
         self.height = height
         
-        self._grid: list[list[object | None]] = [
+        self._grid: list[list[Union[Fish, Shark, None]]] = [
             [None for _ in range(width)]
             for _ in range(height)
         ]
         
-    def get(self, x: int, y: int):
+    def get(self, x: int, y: int) -> Union[Fish, Shark, None]:
         return self._grid[y][x]
     
-    def set(self, x: int, y: int, entity: object) -> None:
+    def set(self, x: int, y: int, entity: Union[Fish, Shark, None]) -> None:
         self._grid[y][x] = entity
        
     def wrap(self, x: int, y: int) -> tuple[int, int]: 
@@ -35,8 +39,11 @@ class Planet:
                 if self.is_free(nx, ny)]
 
     def fish_neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
-        return [(nx, ny) for nx, ny in self.neighbors(x, y)
-                if self.get(nx, ny) and self.get(nx, ny).__class__.__name__ == "Fish"]
+        return [
+            (nx, ny)
+            for nx, ny in self.neighbors(x, y)
+            if isinstance(self.get(nx, ny), Fish)
+        ]
     
 
     def move(self, old_x: int, old_y: int, new_x: int, new_y: int) -> bool:
@@ -44,23 +51,30 @@ class Planet:
         if entity is None:
             return False
 
-        
+        # 👉 Déplacement normal
         if self.is_free(new_x, new_y):
             self.set(new_x, new_y, entity)
             self.set(old_x, old_y, None)
+
+            entity.x = new_x
+            entity.y = new_y
             return True
 
-        if entity.__class__.__name__ == "Shark":
+        if isinstance(entity, Shark):
             target = self.get(new_x, new_y)
-            if target and target.__class__.__name__ == "Fish":
-                self.remove(new_x, new_y)  
+            if isinstance(target, Fish):
+                self.remove(new_x, new_y)
                 self.set(new_x, new_y, entity)
                 self.set(old_x, old_y, None)
+
+                entity.x = new_x
+                entity.y = new_y
                 return True
+
         return False
 
 
-    def add(self, entity, x: int, y: int) -> None:
+    def add(self, entity: Union[Fish, Shark], x: int, y: int) -> None:
         self.set(x, y, entity)
 
     def remove(self, x: int, y: int) -> None:
