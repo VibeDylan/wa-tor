@@ -26,20 +26,16 @@ class Shark(Fish):
         if self.energy <= 0:
             planet.remove(self.x, self.y)
 
-    def step(self, planet: 'Planet') -> None:
-        self.age += 1
-
+    def search_fish(self, planet: 'Planet') -> None:
         fishes = planet.fish_neighbors(self.x, self.y)
 
         if fishes:
+            self.age += 1
             target = random.choice(fishes)
             self.eat(planet, target)
             return
 
-        free_cells = planet.free_neighbors(self.x, self.y)
-        if free_cells:
-            new_pos = random.choice(free_cells)
-            self.move(planet, new_pos)
+        self.search_free(planet)
 
         self.energy -= 1
 
