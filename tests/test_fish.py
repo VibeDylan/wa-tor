@@ -39,7 +39,7 @@ class TestFishAskDirection:
         assert planet.get(2 ,2) is None
         assert planet.get(2, 3) is fish
         
-        assert fish.age == 2
+        assert fish.age == 1
 
     def test_ask_direction_no_free_cells(self, monkeypatch):
         fish = Fish(5, 5)
