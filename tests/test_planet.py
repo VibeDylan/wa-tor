@@ -59,8 +59,6 @@ class TestPlanetNeighbors:
         
         result = planet.neighbors(0, 0)
         assert result == [(0, 4), (0, 1), (4, 0), (1, 0)]
-        
-<<<<<<< HEAD
 
 class TestPlanetFreeNeighbors:
     def test_all_neighbors_free(self):
