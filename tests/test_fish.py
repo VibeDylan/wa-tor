@@ -40,3 +40,14 @@ class TestFishAskDirection:
         assert planet.get(2, 3) is fish
         
         assert fish.age == 2
+
+    def test_ask_direction_no_free_cells(self, monkeypatch):
+        fish = Fish(5, 5)
+        planet = Planet(10, 10)
+
+        for (nx, ny) in planet.neighbors(5, 5):
+            planet.add(Fish(nx, ny), nx, ny)
+
+        direction = fish.ask_direction(planet)
+        assert fish.x == 5
+        assert fish.y == 5
