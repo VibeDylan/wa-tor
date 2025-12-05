@@ -15,7 +15,7 @@ class Fish:
         self.reproduction_time = reproduction_time
     
 
-    def _move(self, planet: 'Planet', new_position: tuple[int, int]) -> None:
+    def move(self, planet: 'Planet', new_position: tuple[int, int]) -> None:
         old_position = (self.x, self.y)
         move_allowed = planet.move(self.x, self.y, new_position[0], new_position[1])
         if move_allowed:
