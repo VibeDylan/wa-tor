@@ -17,7 +17,7 @@ class Planet:
     def get(self, x: int, y: int) -> Union[Fish, Shark, None]:
         return self._grid[y][x]
     
-    def set(self, x: int, y: int, entity: Union[Fish, Shark, None]) -> None:
+    def _set(self, x: int, y: int, entity: Union[Fish, Shark, None]) -> None:
         self._grid[y][x] = entity
        
     def wrap(self, x: int, y: int) -> tuple[int, int]: 
@@ -54,8 +54,8 @@ class Planet:
 
         # 👉 Déplacement normal
         if self.is_free(new_x, new_y):
-            self.set(new_x, new_y, entity)
-            self.set(old_x, old_y, None)
+            self._set(new_x, new_y, entity)
+            self._set(old_x, old_y, None)
 
             entity.x = new_x
             entity.y = new_y
@@ -65,8 +65,8 @@ class Planet:
             target = self.get(new_x, new_y)
             if isinstance(target, Fish):
                 self.remove(new_x, new_y)
-                self.set(new_x, new_y, entity)
-                self.set(old_x, old_y, None)
+                self._set(new_x, new_y, entity)
+                self._set(old_x, old_y, None)
 
                 entity.x = new_x
                 entity.y = new_y
@@ -74,9 +74,8 @@ class Planet:
 
         return False
 
-
     def add(self, entity: Union[Fish, Shark], x: int, y: int) -> None:
-        self.set(x, y, entity)
+        self._set(x, y, entity)
 
     def remove(self, x: int, y: int) -> None:
-        self.set(x, y, None)
+        self._set(x, y, None)
