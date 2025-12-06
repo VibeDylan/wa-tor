@@ -4,6 +4,7 @@ from typing import Union
 from .fish import Fish
 from .shark import Shark
 
+
 class Planet:
     def __init__(self, width: int, height: int):
         self.width = width
@@ -14,22 +15,20 @@ class Planet:
             for _ in range(height)
         ]
 
+        self.simulation = None
+
 
     def get(self, x: int, y: int) -> Union[Fish, Shark, None]:
         return self._grid[y][x]
 
-
     def set(self, x: int, y: int, entity: Union[Fish, Shark, None]) -> None:
         self._grid[y][x] = entity
-
 
     def wrap(self, x: int, y: int) -> tuple[int, int]:
         return x % self.width, y % self.height
 
-
     def is_free(self, x: int, y: int) -> bool:
         return self.get(x, y) is None
-
 
     def neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
         positions = [
@@ -40,11 +39,9 @@ class Planet:
         ]
         return [self.wrap(nx, ny) for nx, ny in positions]
 
-
     def free_neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
         return [(nx, ny) for nx, ny in self.neighbors(x, y)
                 if self.is_free(nx, ny)]
-
 
     def fish_neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
         return [
@@ -60,31 +57,31 @@ class Planet:
             return False
 
         new_x, new_y = self.wrap(new_x, new_y)
+        target = self.get(new_x, new_y)
 
-        if self.is_free(new_x, new_y):
+        if target is None:
             self.set(new_x, new_y, entity)
             self.set(old_x, old_y, None)
             entity.x = new_x
             entity.y = new_y
             return True
 
-        # SHARK EATS FISH
-        if isinstance(entity, Shark):
-            target = self.get(new_x, new_y)
-            if isinstance(target, Fish):
-                self.remove(new_x, new_y)
-                self.set(new_x, new_y, entity)
-                self.set(old_x, old_y, None)
-                entity.x = new_x
-                entity.y = new_y
-                return True
+        if isinstance(entity, Shark) and isinstance(target, Fish):
+            # enlever le poisson de la liste des poissons
+            if self.simulation and target in self.simulation.fishes:
+                self.simulation.fishes.remove(target)
+
+            self.set(new_x, new_y, entity)
+            self.set(old_x, old_y, None)
+            entity.x = new_x
+            entity.y = new_y
+            return True
 
         return False
 
 
     def add(self, entity: Union[Fish, Shark], x: int, y: int) -> None:
         self.set(x, y, entity)
-
 
     def remove(self, x: int, y: int) -> None:
         self.set(x, y, None)
