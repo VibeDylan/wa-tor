@@ -1,10 +1,12 @@
 from __future__ import annotations
 import random
+import time
 
 from typing import Union
 from .planet import Planet
 from .fish import Fish
 from .shark import Shark
+from .config import grid_width, grid_height, number_fishes, number_sharks
 
 
 def display_grid(planet: 'Planet', chronon: int) -> None:
@@ -82,39 +84,37 @@ def count_entities(entities: list[Union[Fish, Shark]]) -> tuple[int, int]:
 def move_entities(planet: 'Planet', entities: list[Union[Fish, Shark]]) -> None:
 	i = 0
 	for entity in entities:
-		print(i, " ", entity)
 		if type(entity) == Fish:
 			if not entity.alive:
 				continue
 			entity.search_free(planet)
 		else:
 			entity.search_fish(planet)
-		print(i, " ", entity)
-		i += 1
 	entities = get_entities(planet)
 	return entities
 
 
-def run_simulation(planet: 'Planet', chronon: int, duration: int, entities: list[Union[Fish, Shark]]) -> None:
+def start_simulation(planet: 'Planet', chronon: int, entities: list[Union[Fish, Shark]]) -> None:
 	sharks, fishes = count_entities(entities)
-	while sharks > 0 and fishes > 0 and chronon < duration:
+	while sharks > 0 and fishes > 0:
 		chronon += 1
 		entities = move_entities(planet, entities)
 		display_grid(planet, chronon)
 		sharks, fishes = count_entities(entities)
-
+		# time.sleep(3)
+	print("Number of chronons : ", chronon)
 		
 
 
 def simulation():
-	wator = Planet(5, 3)
+	wator = Planet(grid_width, grid_height)
 	chronon = 0
 
-	create_entities(wator, 1, 1)
+	create_entities(wator, number_fishes, number_sharks)
 	display_grid(wator, chronon)
 
 	entities = get_entities(wator)
-	run_simulation(wator, chronon, 11, entities)
+	start_simulation(wator, chronon, entities)
 
 
 

@@ -6,9 +6,11 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .planet import Planet
 
+from .config import fish_reproduction
+
 
 class Fish:
-    def __init__(self, x : int, y : int, age: int=0, reproduction_time: int=3, alive: bool=True):
+    def __init__(self, x : int, y : int, age: int=0, reproduction_time: int=fish_reproduction, alive: bool=True):
         self.x = x
         self.y = y
         self.age = age

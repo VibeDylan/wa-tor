@@ -7,8 +7,10 @@ from .fish import Fish
 if TYPE_CHECKING:
     from .planet import Planet
 
+from .config import shark_reproduction, shark_energy, shark_energy_gain
+
 class Shark(Fish):
-    def __init__(self, x: int, y: int, reproduction_time: int=5, energy: int=10):
+    def __init__(self, x: int, y: int, reproduction_time: int=shark_reproduction, energy: int=shark_energy):
         super().__init__(x, y, age=0, reproduction_time=reproduction_time)
         self.energy = energy
 
@@ -21,7 +23,7 @@ class Shark(Fish):
 
     def eat(self, planet: 'Planet', new_position: tuple[int, int]) -> None:
         self.move(planet, new_position)
-        self.energy = min(self.energy + 3, 10)
+        self.energy = min(self.energy + shark_energy_gain, shark_energy)
 
 
     def check_if_dead(self, planet: 'Planet') -> None:
