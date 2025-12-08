@@ -13,21 +13,22 @@ def display_grid(planet: 'Planet', chronon: int) -> None:
 	print((planet.width*4+4)*"-")
 	print(f"Chronon {chronon} :")
 	print((planet.width*4+4)*"-")
-	print(f"  ", end='')
+	print(f"  ", end="")
 	for j in range(planet.width):
-		print(f"| {j} ", end='')
+		print(f"| {j} ", end="")
 	print("| ")
 	print((planet.width*4+4)*"-")
 
 	for row in range(planet.height):
-		print(f"{row} ", end='')
+		print(f"{row} ", end="")
 		for column in range(planet.width):
-			if type(planet.get(column, row)) == Fish:
-				print(f"|\U0001F420 ", end='')
-			elif type(planet.get(column, row)) == Shark:
-				print(f"|\U0001F988 ", end='')
+			cell = planet.get(column, row)
+			if type(cell) == Fish:
+				print(f"|\U0001F420 ", end="")
+			elif type(cell) == Shark:
+				print(f"|\U0001F988 ", end="")
 			else:
-				print(f"| _ ", end='')
+				print(f"| _ ", end="")
 		print("|")
 		print((planet.width*4+4)*"-")
 
@@ -41,27 +42,21 @@ def get_free_positions(planet: 'Planet') -> list[tuple[int, int]]:
 	return free_positions
 
 
-def create_fishes(planet: 'Planet', free_positions: list[tuple[int, int]]) -> None:
+def create_entity(planet: 'Planet', instance: Union[Fish, Shark], free_positions: list[tuple[int, int]]):
 	x, y = free_positions.pop()
-	new_fish = Fish(x = x, y = y)
-	planet.add(new_fish, new_fish.x, new_fish.y)
+	new_entity = instance(x = x, y = y)
+	planet.add(new_entity, new_entity.x, new_entity.y)
 
 
-def create_sharks(planet: 'Planet', free_positions: list[tuple[int, int]]) -> None:
-	x, y = free_positions.pop()
-	new_shark = Shark(x = x, y = y)
-	planet.add(new_shark, new_shark.x, new_shark.y)
-
-
-def create_entities(planet: 'Planet', number_fishes: int, number_sharks: int) -> None:
+def place_entities(planet: 'Planet', number_fishes: int, number_sharks: int) -> None:
 	free_positions = get_free_positions(planet)
 	random.shuffle(free_positions)
 
 	for fish in range(number_fishes):
-		create_fishes(planet, free_positions)
+		create_entity(planet, Fish, free_positions)
 
 	for shark in range(number_sharks):
-		create_sharks(planet, free_positions)
+		create_entity(planet, Shark, free_positions)
 
 
 def get_entities(planet: 'Planet') -> list[Union[Fish, Shark]]:
@@ -110,7 +105,7 @@ def simulation():
 	wator = Planet(grid_width, grid_height)
 	chronon = 0
 
-	create_entities(wator, number_fishes, number_sharks)
+	place_entities(wator, number_fishes, number_sharks)
 	display_grid(wator, chronon)
 
 	entities = get_entities(wator)
