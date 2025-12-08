@@ -7,7 +7,9 @@ from .fish import Fish
 from .shark import Shark
 
 
-def display_grid(planet: 'Planet') -> None:
+def display_grid(planet: 'Planet', chronon: int) -> None:
+	print((planet.width*4+4)*"-")
+	print(f"Chronon {chronon} :")
 	print((planet.width*4+4)*"-")
 	print(f"  ", end='')
 	for j in range(planet.width):
@@ -70,51 +72,51 @@ def get_entities(planet: 'Planet') -> list[Union[Fish, Shark]]:
 	return entities
 
 
-def move_entities(planet: 'Planet') -> None:
-	entities = get_entities(planet)
+def count_entities(entities: list[Union[Fish, Shark]]) -> tuple[int, int]:
+	sharks = sum(1 for entity in entities if type(entity) == Shark)
+	fishes = sum(1 for entity in entities if type(entity) == Fish)
+	print(f"Shark : {sharks}, Fish : {fishes}")
+	return sharks, fishes
+
+
+def move_entities(planet: 'Planet', entities: list[Union[Fish, Shark]]) -> None:
 	i = 0
 	for entity in entities:
 		print(i, " ", entity)
 		if type(entity) == Fish:
+			if not entity.alive:
+				continue
 			entity.search_free(planet)
 		else:
 			entity.search_fish(planet)
-			# enlever Fish mangé de entities
 		print(i, " ", entity)
 		i += 1
+	entities = get_entities(planet)
+	return entities
 
 
-def main():
+def run_simulation(planet: 'Planet', chronon: int, duration: int, entities: list[Union[Fish, Shark]]) -> None:
+	sharks, fishes = count_entities(entities)
+	while sharks > 0 and fishes > 0 and chronon < duration:
+		chronon += 1
+		entities = move_entities(planet, entities)
+		display_grid(planet, chronon)
+		sharks, fishes = count_entities(entities)
+
+		
+
+
+def simulation():
 	wator = Planet(5, 3)
+	chronon = 0
 
 	create_entities(wator, 1, 1)
+	display_grid(wator, chronon)
 
-	print((wator.width*4+4)*"-")
-	print("Chronon 0 :")
-	display_grid(wator)
+	entities = get_entities(wator)
+	run_simulation(wator, chronon, 11, entities)
 
-	move_entities(wator)
 
-	print((wator.width*4+4)*"-")
-	print("Chronon 1 :")
-	display_grid(wator)
 
-	move_entities(wator)
+simulation()
 
-	print((wator.width*4+4)*"-")
-	print("Chronon 2 :")
-	display_grid(wator)
-
-	move_entities(wator)
-
-	print((wator.width*4+4)*"-")
-	print("Chronon 3 :")
-	display_grid(wator)
-
-main()
-
-# Quand Shark mange un Fish, se déplace de 2 cases ???
-# Empiètement fish_reprod / eat
-# Pb de reproduction : un Fish ne devrait pas pouvoir se reproduire s'il est mangé
-# Séparer Fish/Shark dans move_entities : déplacer d'abord tous les Sharks puis récupérer les Fish restants ? ou inversement ?
-# Ou ajouter condition : si une entité disparaît, l'enlever de la liste entities ?

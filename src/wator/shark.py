@@ -14,7 +14,7 @@ class Shark(Fish):
 
 
     def reproduce(self, planet: 'Planet', old_position: tuple[int, int]) -> None:
-        if self.age > 0 and self.age % self.reproduction_time == 0:
+        if self.age > 0 and self.energy > 0 and self.age % self.reproduction_time == 0:
             baby = Shark(x=old_position[0], y=old_position[1])
             planet.add(baby, baby.x, baby.y)
 

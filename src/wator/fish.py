@@ -8,11 +8,12 @@ if TYPE_CHECKING:
 
 
 class Fish:
-    def __init__(self, x : int, y : int, age=0, reproduction_time=3):
+    def __init__(self, x : int, y : int, age: int=0, reproduction_time: int=3, alive: bool=True):
         self.x = x
         self.y = y
         self.age = age
         self.reproduction_time = reproduction_time
+        self.alive = alive
 
 
     def move(self, planet: 'Planet', new_position: tuple[int, int]) -> None:

@@ -65,6 +65,7 @@ class Planet:
             target = self.get(new_x, new_y)
             if type(target) == Fish:
                 self.remove(new_x, new_y)
+                target.alive = False
                 self.set(new_x, new_y, entity)
                 self.set(old_x, old_y, None)
 
