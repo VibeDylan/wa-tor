@@ -30,12 +30,12 @@ class Simulation:
         random.shuffle(all_positions)
         
         for x, y in all_positions[:nb_fish]:
-            fish = Fish(x, y)
+            fish = Fish(x, y, reproduction_time=4)
             self.fishes.append(fish)
             self.planet.add_entity(fish, x, y)
         
         for x, y in all_positions[nb_fish:nb_fish + nb_shark]:
-            shark = Shark(x, y)
+            shark = Shark(x, y, reproduction_time=12)
             self.sharks.append(shark)
             self.planet.add_entity(shark, x, y)
 
@@ -86,9 +86,9 @@ class Simulation:
 
 
 if __name__ == "__main__":
-    sim = Simulation(width=10, height=10, nb_fish=20, nb_shark=5)
+    sim = Simulation(width=15, height=15, nb_fish=70, nb_shark=12)
     
-    for _ in range(30):
+    for _ in range(100):
         sim.display()
         sim.step()
         
