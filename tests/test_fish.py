@@ -8,18 +8,13 @@ class TestFishMove:
         fish = Fish(1, 1, age=0)
 
         planet.set(1, 1, fish)
-        
-        fish.move(planet, (1, 2))
-        
-        
-        assert fish.x == 1
-        assert fish.y == 2
+
+        fish.step(planet)
         
         assert fish.age == 1
         
         assert planet.get(1, 1) is None
-        assert planet.get(1, 2) is fish
-        
+        assert planet.get(fish.x, fish.y) is fish
         
 class TestFishAskDirection:
     def test_ask_direction_moves_to_free_cell(self, monkeypatch):
