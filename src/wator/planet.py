@@ -28,12 +28,12 @@ class Planet:
     
     def neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
         positions = [
-            (x, y - 1),  
-            (x, y + 1),  
-            (x - 1, y),  
-            (x + 1, y), 
+            (x, y - 1),
+            (x, y + 1),
+            (x - 1, y),
+            (x + 1, y),
         ]
-        return [self.wrap(nx, ny) for nx, ny in positions] 
+        return [self.wrap(nx, ny) for nx, ny in positions]
     
     def free_neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
         return [(nx, ny) for nx, ny in self.neighbors(x, y)
@@ -52,7 +52,9 @@ class Planet:
         if entity is None:
             return False
 
-        # 👉 Déplacement normal
+        new_x, new_y = self.wrap(new_x, new_y)
+
+        # Déplacement normal
         if self.is_free(new_x, new_y):
             self.set(new_x, new_y, entity)
             self.set(old_x, old_y, None)

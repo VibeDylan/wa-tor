@@ -31,6 +31,16 @@ class Fish:
             baby = Fish(old_position[0], old_position[1])
             planet.add(baby, baby.x, baby.y)
 
+            
+    def step(self, planet: 'Planet') -> None:
+        # Le poisson vieillit au début du tour (logique Wa-Tor)
+        self.age += 1
+
+        free_cells = planet.free_neighbors(self.x, self.y)
+    
+        if free_cells:
+            new_position = random.choice(free_cells)
+            self.move(planet, new_position)
 
     def search_free(self, planet: 'Planet') -> None:
         self.age += 1
