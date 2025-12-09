@@ -33,7 +33,6 @@ class Fish:
 
             
     def step(self, planet: 'Planet') -> None:
-        # Le poisson vieillit au début du tour (logique Wa-Tor)
         self.age += 1
 
         free_cells = planet.free_neighbors(self.x, self.y)
