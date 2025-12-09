@@ -26,7 +26,7 @@ class TestFishAskDirection:
             return (2 , 3)
         
         monkeypatch.setattr(random, "choice", fake_choise)
-        fish.ask_direction(planet)
+        fish.search_free(planet)
         
         assert fish.x == 2
         assert fish.y == 3
@@ -43,7 +43,7 @@ class TestFishAskDirection:
         for (nx, ny) in planet.neighbors(5, 5):
             planet.add(Fish(nx, ny), nx, ny)
 
-        direction = fish.ask_direction(planet)
+        direction = fish.search_free(planet)
         assert fish.x == 5
         assert fish.y == 5
         
