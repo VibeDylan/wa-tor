@@ -28,12 +28,12 @@ class Planet:
     
     def neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
         positions = [
-            (x, y - 1),  
-            (x, y + 1),  
-            (x - 1, y),  
-            (x + 1, y), 
+            (x, y - 1),
+            (x, y + 1),
+            (x - 1, y),
+            (x + 1, y),
         ]
-        return [self.wrap(nx, ny) for nx, ny in positions] 
+        return [self.wrap(nx, ny) for nx, ny in positions]
     
     def free_neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
         return [(nx, ny) for nx, ny in self.neighbors(x, y)
@@ -43,7 +43,7 @@ class Planet:
         return [
             (nx, ny)
             for nx, ny in self.neighbors(x, y)
-            if isinstance(self.get(nx, ny), Fish)
+            if type(self.get(nx, ny)) == Fish
         ]
     
 
@@ -51,6 +51,8 @@ class Planet:
         entity = self.get(old_x, old_y)
         if entity is None:
             return False
+
+        new_x, new_y = self.wrap(new_x, new_y)
 
         if self.is_free(new_x, new_y):
             self.set(new_x, new_y, entity)
@@ -62,8 +64,9 @@ class Planet:
 
         if isinstance(entity, Shark):
             target = self.get(new_x, new_y)
-            if isinstance(target, Fish):
+            if type(target) is Fish:
                 self.remove(new_x, new_y)
+                target.alive = False
                 self.set(new_x, new_y, entity)
                 self.set(old_x, old_y, None)
 
@@ -72,7 +75,6 @@ class Planet:
                 return True
 
         return False
-
 
     def add(self, entity: Union[Fish, Shark], x: int, y: int) -> None:
         self.set(x, y, entity)
