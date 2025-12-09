@@ -43,7 +43,7 @@ class Planet:
         return [
             (nx, ny)
             for nx, ny in self.neighbors(x, y)
-            if isinstance(self.get(nx, ny), Fish)
+            if type(self.get(nx, ny)) == Fish
         ]
     
 
@@ -65,8 +65,9 @@ class Planet:
 
         if isinstance(entity, Shark):
             target = self.get(new_x, new_y)
-            if isinstance(target, Fish):
+            if type(target) is Fish:
                 self.remove(new_x, new_y)
+                target.alive = False
                 self.set(new_x, new_y, entity)
                 self.set(old_x, old_y, None)
 
@@ -75,7 +76,6 @@ class Planet:
                 return True
 
         return False
-
 
     def add(self, entity: Union[Fish, Shark], x: int, y: int) -> None:
         self.set(x, y, entity)
