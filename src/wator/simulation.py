@@ -23,10 +23,10 @@ def display_grid(planet: 'Planet', chronon: int) -> None:
 		print(f"{row} ", end="")
 		for column in range(planet.width):
 			cell = planet.get(column, row)
-			if type(cell) == Fish:
-				print(f"|\U0001F420 ", end="")
-			elif type(cell) == Shark:
+			if isinstance(cell, Shark):
 				print(f"|\U0001F988 ", end="")
+			elif isinstance(cell, Fish):
+				print(f"|\U0001F420 ", end="")
 			else:
 				print(f"| _ ", end="")
 		print("|")
@@ -70,8 +70,8 @@ def get_entities(planet: 'Planet') -> list[Union[Fish, Shark]]:
 
 
 def count_entities(entities: list[Union[Fish, Shark]]) -> tuple[int, int]:
-	sharks = sum(1 for entity in entities if type(entity) == Shark)
-	fishes = sum(1 for entity in entities if type(entity) == Fish)
+	sharks = sum(1 for entity in entities if type(entity) is Shark)
+	fishes = sum(1 for entity in entities if type(entity) is Fish)
 	print(f"Shark : {sharks}, Fish : {fishes}")
 	return sharks, fishes
 
@@ -79,7 +79,7 @@ def count_entities(entities: list[Union[Fish, Shark]]) -> tuple[int, int]:
 def move_entities(planet: 'Planet', entities: list[Union[Fish, Shark]]) -> None:
 	i = 0
 	for entity in entities:
-		if type(entity) == Fish:
+		if type(entity) is Fish:
 			if not entity.alive:
 				continue
 			entity.search_free(planet)
@@ -112,6 +112,4 @@ def simulation():
 	start_simulation(wator, chronon, entities)
 
 
-
-simulation()
 

@@ -61,9 +61,9 @@ class Planet:
             entity.y = new_y
             return True
 
-        if type(entity) == Shark:
+        if isinstance(entity, Shark):
             target = self.get(new_x, new_y)
-            if type(target) == Fish:
+            if type(target) is Fish:
                 self.remove(new_x, new_y)
                 target.alive = False
                 self.set(new_x, new_y, entity)
