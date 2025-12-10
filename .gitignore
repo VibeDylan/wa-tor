@@ -7,9 +7,11 @@ __pycache__/
 
 # Pytest
 .pytest_cache/
+venv
 
 # Database
 database_wator.db
 
 # For IntelliJ Users
 .idea
+
