@@ -1,47 +1,12 @@
 from __future__ import annotations
-import random, time, datetime, sqlite3
+import random, time
 
 from typing import Union
 from .planet import Planet
 from .fish import Fish
 from .shark import Shark
 from .config import grid_width, grid_height, number_fishes, number_sharks
-
-
-connection = sqlite3.connect("database_wator.db")
-cursor = connection.cursor()
-
-
-def create_database():
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS simulation(
-            id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-            datetime TEXT NOT NULL,
-            chronons INTEGER NOT NULL,
-            fishes INTEGER NOT NULL,
-            sharks INTEGER NOT NULL
-        )
-    """)
-
-    connection.commit()
-
-
-def add_simulation_to_database(nb_chronon: int, nb_fish: int, nb_sharks: int):
-	date = datetime.datetime.now()
-	formatted_date = date.strftime("%Y-%m-%d %H:%M")
-	simulation_data = {"datetime": formatted_date, "chronons": nb_chronon, "fishes": nb_fish, "sharks": nb_sharks}
-	
-	cursor.execute("""
-        INSERT INTO simulation(datetime, chronons, fishes, sharks) VALUES (:datetime, :chronons, :fishes, :sharks)
-    """, simulation_data)
-	connection.commit()
-
-
-def display_history():
-    cursor.execute("""SELECT * FROM simulation""")
-    last_results = cursor.fetchall()[-10:]
-    for row in last_results:
-        print("Simulation n°{0} ({1}) lasted {2} chronons with {3} fishes left and {4} sharks left.".format(row[0], row[1], row[2], row[3], row[4]))
+from .database import create_database, archive_simulation
 
 
 def display_grid(planet: 'Planet', chronon: int) -> None:
@@ -133,7 +98,8 @@ def start_simulation(planet: 'Planet', chronon: int, entities: list[Union[Fish, 
 		sharks, fishes = count_entities(entities)
 		time.sleep(2)
 	print("Number of chronons : ", chronon)
-	add_simulation_to_database(chronon, fishes, sharks)
+	
+	archive_simulation(chronon, fishes, sharks)
 		
 
 
