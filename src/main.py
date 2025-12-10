@@ -1,7 +1,6 @@
-from wator.simulation import simulation, display_history
+from wator.simulation import simulation
 
 def main():
     simulation()
-    # display_history()
 
 main()
