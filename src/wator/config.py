@@ -1,5 +1,5 @@
 grid_width = 30
-grid_height = 25
+grid_height = 30
 number_fishes = 10
 number_sharks = 10
 fish_reproduction = 5
