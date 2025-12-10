@@ -10,3 +10,6 @@ __pycache__/
 
 # Database
 database_wator.db
+
+# For IntelliJ Users
+.idea
