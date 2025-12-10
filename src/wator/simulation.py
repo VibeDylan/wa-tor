@@ -1,12 +1,12 @@
 from __future__ import annotations
-import random
-import time
+import random, time
 
 from typing import Union
 from .planet import Planet
 from .fish import Fish
 from .shark import Shark
 from .config import grid_width, grid_height, number_fishes, number_sharks
+from .database import create_database, archive_simulation
 
 
 def display_grid(planet: 'Planet', chronon: int) -> None:
@@ -98,10 +98,13 @@ def start_simulation(planet: 'Planet', chronon: int, entities: list[Union[Fish, 
 		sharks, fishes = count_entities(entities)
 		time.sleep(2)
 	print("Number of chronons : ", chronon)
+	
+	archive_simulation(chronon, fishes, sharks)
 		
 
 
 def simulation():
+	create_database()
 	wator = Planet(grid_width, grid_height)
 	chronon = 0
 
