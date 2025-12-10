@@ -10,12 +10,13 @@ from .config import fish_reproduction
 
 
 class Fish:
-    def __init__(self, x : int, y : int, age: int=0, reproduction_time: int=fish_reproduction, alive: bool=True):
+    def __init__(self, x : int, y : int, age: int=0, reproduction_time: int=fish_reproduction, alive: bool=True, name: str="fish"):
         self.x = x
         self.y = y
         self.age = age
         self.reproduction_time = reproduction_time
         self.alive = alive
+        self.name = name
 
 
     def move(self, planet: 'Planet', new_position: tuple[int, int]) -> None:

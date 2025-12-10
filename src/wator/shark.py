@@ -10,8 +10,8 @@ if TYPE_CHECKING:
 from .config import shark_reproduction, shark_energy, shark_energy_gain
 
 class Shark(Fish):
-    def __init__(self, x: int, y: int, reproduction_time: int=shark_reproduction, energy: int=shark_energy):
-        super().__init__(x, y, age=0, reproduction_time=reproduction_time)
+    def __init__(self, x: int, y: int, reproduction_time: int=shark_reproduction, energy: int=shark_energy, name: str="shark"):
+        super().__init__(x, y, age=0, reproduction_time=reproduction_time, name=name)
         self.energy = energy
 
 

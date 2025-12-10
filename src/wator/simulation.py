@@ -116,3 +116,7 @@ def simulation():
 
 
 
+def initiate_grid():
+	wator = Planet(grid_width, grid_height)
+	place_entities(wator, number_fishes, number_sharks)
+	return wator
