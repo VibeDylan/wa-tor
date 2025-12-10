@@ -2,6 +2,7 @@ from __future__ import annotations
 import random
 import time
 import pygame
+from pathlib import Path
 from typing import Union
 from .planet import Planet
 from .fish import Fish
@@ -28,10 +29,17 @@ class WatorGUI:
         pygame.display.set_caption("Wa-Tor Simulation")
         self.clock = pygame.time.Clock()
 
-        try:
-            self.font_emoji = pygame.font.SysFont("Segoe UI Emoji", self.cell_size)
-        except:
-            self.font_emoji = pygame.font.SysFont(None, self.cell_size)
+        # Charger les sprites
+        assets_dir = Path(__file__).parent.parent / "assets"
+        fish_sprite_path = assets_dir / "fish_sprite.png"
+        shark_sprite_path = assets_dir / "shark_sprite.png"
+        
+        # Charger et redimensionner les sprites
+        fish_sprite_raw = pygame.image.load(str(fish_sprite_path))
+        shark_sprite_raw = pygame.image.load(str(shark_sprite_path))
+        
+        self.fish_sprite = pygame.transform.scale(fish_sprite_raw, (self.cell_size, self.cell_size))
+        self.shark_sprite = pygame.transform.scale(shark_sprite_raw, (self.cell_size, self.cell_size))
 
         self.font_text = pygame.font.SysFont(None, 30)
 
@@ -165,21 +173,19 @@ class WatorGUI:
                     
                     if entity_type == 'Fish':
                         fish_count += 1
-                        emoji_surface = self.font_emoji.render("🐟", True, self.text_color)
-                        emoji_rect = emoji_surface.get_rect(center=rect.center)
-                        self.screen.blit(emoji_surface, emoji_rect)
+                        sprite_rect = self.fish_sprite.get_rect(center=rect.center)
+                        self.screen.blit(self.fish_sprite, sprite_rect)
                         
                     elif entity_type == 'Shark':
                         shark_count += 1
-                        emoji_surface = self.font_emoji.render("🦈", True, self.text_color)
-                        emoji_rect = emoji_surface.get_rect(center=rect.center)
-                        self.screen.blit(emoji_surface, emoji_rect)
+                        sprite_rect = self.shark_sprite.get_rect(center=rect.center)
+                        self.screen.blit(self.shark_sprite, sprite_rect)
                 
                 pygame.draw.rect(self.screen, self.grid_color, rect, 1)
         
         status = "ACTIVE" if self.simulation_active else "ARRÊTÉE"
-        info_text = f"Chronon: {self.chronon}  |  🐟 : {fish_count}  |  🦈 : {shark_count} "
-        text_surface = self.font_emoji.render(info_text, True, self.text_color)
+        info_text = f"Chronon: {self.chronon}  |  Poissons: {fish_count}  |  Requins: {shark_count} "
+        text_surface = self.font_text.render(info_text, True, self.text_color)
         self.screen.blit(text_surface, (10, 5))
 
         wave_rect = pygame.Rect(0, self.window_height - 20, self.window_width, 20)

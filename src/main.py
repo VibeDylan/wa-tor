@@ -3,7 +3,6 @@ from wator.gui import WatorGUI
 
 
 def main():
-    #simulation()
     gui = WatorGUI()
     gui.run()
 
