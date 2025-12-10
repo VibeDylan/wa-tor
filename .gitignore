@@ -11,5 +11,7 @@ venv
 
 # Database
 database_wator.db
-venv
+
+# For IntelliJ Users
+.idea
 
