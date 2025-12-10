@@ -60,3 +60,12 @@ class TestFishReproduce:
 
         assert planet.get(2, 2) is None
         assert planet.get(2, 3) is fish
+
+    def test_reproduction_after_time(self):
+        planet = Planet(5, 5)
+        fish = Fish(2, 2, age=3, reproduction_time=3)
+        planet.set(2, 2, fish)
+
+        fish.step(planet)
+
+        assert planet.get(2, 2) is isinstance(Fish)
