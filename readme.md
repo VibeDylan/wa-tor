@@ -1,5 +1,7 @@
 # Wa-Tor project
 
+Wa-Tor is an ecological simulation that models the interactions between two species—fish and sharks—within a toroidal ocean world. The project illustrates predator–prey dynamics through simple rules of movement, reproduction, and survival, allowing emergent behaviors to appear from basic agent-based interactions.
+
 ## Requirements
 
 For the "Pygame" user interface library to work, you must launch the project with Python <b>3.12.</b>
