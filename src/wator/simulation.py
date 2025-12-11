@@ -7,7 +7,7 @@ from .planet import Planet
 from .fish import Fish
 from .shark import Shark
 from .config import grid_width, grid_height, number_fishes, number_sharks
-from .database import create_database
+from .database import create_database, archive_simulation
 
 
 
@@ -42,7 +42,6 @@ def get_free_positions(planet: 'Planet') -> list[tuple[int, int]]:
 			if planet.get(column, row) is None:
 				free_positions.append((column, row))
 	return free_positions
-
 
 def create_entity(planet: 'Planet', instance: Union[Fish, Shark], free_positions: list[tuple[int, int]]):
 	x, y = free_positions.pop()
