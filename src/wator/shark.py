@@ -30,11 +30,11 @@ class Shark(Fish):
         """
             Make the shark reproduces.
 
-            Create a new Shark and add it to the grid, just after the old Shark.
+            Create a new Shark and add it to the grid, in the old position of the parent shark.
 
             Args:
                 planet (Planet): The planet
-                old_position (tuple[int, int]): The current position (x, y)
+                old_position (tuple[int, int]): The old position (x, y)
         """
         if self.age > 0 and self.energy > 0 and self.age % self.reproduction_time == 0:
             baby = Shark(x=old_position[0], y=old_position[1])

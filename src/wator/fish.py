@@ -49,11 +49,11 @@ class Fish:
         """
             Make the fish reproduces.
 
-            Create a new Fish and add it to the grid, just after the old Fish.
+            Create a new Fish and add it to the grid, in the old position of the parent fish
 
             Args:
                 planet (Planet): The planet
-                old_position (tuple[int, int]): The current position (x, y)
+                old_position (tuple[int, int]): The old position (x, y)
         """
         if self.age > 0 and self.age % self.reproduction_time == 0:
             baby = Fish(old_position[0], old_position[1])
@@ -62,7 +62,7 @@ class Fish:
 
     def search_free(self, planet: 'Planet') -> None:
         """
-            Move the fish to the new closest free neighbors position.
+            Check if free and then move the fish to the new closest free neighbors position.
 
             Args:
                 planet (Planet): The planet

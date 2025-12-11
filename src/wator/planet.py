@@ -49,7 +49,7 @@ class Planet:
         """ Simulate toroidal shape and handle boundaries
 
             Managing the toroidal shape of the grid, by making entities
-            that exceed the boundaries reappear at the beginning.
+            that exceed the boundaries reappear at the opposite.
 
             Args:
                 x (int): actual x position
