@@ -1,4 +1,4 @@
-# War-Tor project
+# Wa-Tor project
 
 ## Requirements
 
