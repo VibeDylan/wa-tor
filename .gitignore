@@ -1,2 +1,5 @@
 TICKETS.md
 wator.py
+__pycache__/
+*.pyc
+*.pyo

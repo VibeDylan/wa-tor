@@ -96,7 +96,7 @@ def start_simulation(planet: 'Planet', chronon: int, entities: list[Union[Fish, 
 		entities = move_entities(planet, entities)
 		display_grid(planet, chronon)
 		sharks, fishes = count_entities(entities)
-		# time.sleep(3)
+		time.sleep(2)
 	print("Number of chronons : ", chronon)
 		
 

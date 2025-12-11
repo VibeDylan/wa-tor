@@ -25,7 +25,6 @@ class Shark(Fish):
         self.move(planet, new_position)
         self.energy = min(self.energy + shark_energy_gain, shark_energy)
 
-
     def check_if_dead(self, planet: 'Planet') -> None:
         if self.energy <= 0:
             planet.remove(self.x, self.y)
