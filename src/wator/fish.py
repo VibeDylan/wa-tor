@@ -10,7 +10,19 @@ from .config import fish_reproduction
 
 
 class Fish:
+    """
+        Represent a Fish
+    """
     def __init__(self, x : int, y : int, age: int=0, reproduction_time: int=fish_reproduction, alive: bool=True):
+        """ Initialize a new Fish object.
+
+            Args:
+                x (int): The x coordinate of the fish.
+                y (int): The y coordinate of the fish.
+                age (int): The age of the fish.
+                reproduction_time (int): The time at which the fish will reproduce.
+                alive (bool): Whether the fish is alive.
+        """
         self.x = x
         self.y = y
         self.age = age
@@ -19,6 +31,13 @@ class Fish:
 
 
     def move(self, planet: 'Planet', new_position: tuple[int, int]) -> None:
+        """
+            Move the fish to the new position.
+
+            Args:
+                planet (Planet): The planet
+                new_position (tuple[int, int]): The new position (x, y)
+        """
         old_position = (self.x, self.y)
         move_allowed = planet.move(self.x, self.y, new_position[0], new_position[1])
         
@@ -27,12 +46,27 @@ class Fish:
 
 
     def reproduce(self, planet: 'Planet', old_position: tuple[int, int]) -> None:
+        """
+            Make the fish reproduces.
+
+            Create a new Fish and add it to the grid, in the old position of the parent fish
+
+            Args:
+                planet (Planet): The planet
+                old_position (tuple[int, int]): The old position (x, y)
+        """
         if self.age > 0 and self.age % self.reproduction_time == 0:
             baby = Fish(old_position[0], old_position[1])
             planet.add(baby, baby.x, baby.y)
 
 
     def search_free(self, planet: 'Planet') -> None:
+        """
+            Check if free and then move the fish to the new closest free neighbors position.
+
+            Args:
+                planet (Planet): The planet
+        """
         self.age += 1
         free_cells = planet.free_neighbors(self.x, self.y)
         
