@@ -1,12 +1,14 @@
 from __future__ import annotations
-import random, time
+import random
+import time
 
 from typing import Union
 from .planet import Planet
 from .fish import Fish
 from .shark import Shark
 from .config import grid_width, grid_height, number_fishes, number_sharks
-from .database import create_database, archive_simulation
+from .database import create_database
+
 
 
 def display_grid(planet: 'Planet', chronon: int) -> None:
@@ -175,6 +177,4 @@ def simulation():
 
     entities = get_entities(wator)
     start_simulation(wator, chronon, entities)
-
-
 
