@@ -1,12 +1,14 @@
 from __future__ import annotations
-import random, time
+import random
+import time
 
 from typing import Union
 from .planet import Planet
 from .fish import Fish
 from .shark import Shark
 from .config import grid_width, grid_height, number_fishes, number_sharks
-from .database import create_database, archive_simulation
+from .database import create_database
+
 
 
 def display_grid(planet: 'Planet', chronon: int) -> None:
@@ -72,7 +74,7 @@ def get_entities(planet: 'Planet') -> list[Union[Fish, Shark]]:
 def count_entities(entities: list[Union[Fish, Shark]]) -> tuple[int, int]:
 	sharks = sum(1 for entity in entities if type(entity) is Shark)
 	fishes = sum(1 for entity in entities if type(entity) is Fish)
-	print(f"Shark : {sharks}, Fish : {fishes}")
+	#print(f"Shark : {sharks}, Fish : {fishes}")
 	return sharks, fishes
 
 
@@ -98,8 +100,6 @@ def start_simulation(planet: 'Planet', chronon: int, entities: list[Union[Fish, 
 		sharks, fishes = count_entities(entities)
 		time.sleep(2)
 	print("Number of chronons : ", chronon)
-	
-	archive_simulation(chronon, fishes, sharks)
 		
 
 
@@ -113,6 +113,4 @@ def simulation():
 
 	entities = get_entities(wator)
 	start_simulation(wator, chronon, entities)
-
-
 

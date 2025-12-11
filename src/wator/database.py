@@ -39,13 +39,16 @@ def archive_simulation(nb_chronon: int, nb_fish: int, nb_sharks: int):
 
 
 def display_history():
+
     connection = connect_database()
     cursor = connection.cursor()
-    
-    cursor.execute("""SELECT * FROM simulation""")
-
+    cursor.execute("SELECT * FROM simulation")
     last_results = cursor.fetchall()[-5:]
-    for row in last_results:
-        print("Simulation n°{0} ({1}) lasted {2} chronons with {3} fishes left and {4} sharks left.".format(row[0], row[1], row[2], row[3], row[4]))
-    
     connection.close()
+    
+    text_lines = []
+    for row in last_results:
+        line = f"Chronons: {row[2]} | Poissons: {row[3]} | Requins: {row[4]}"
+        text_lines.append(line)
+    
+    return "\n".join(text_lines)
