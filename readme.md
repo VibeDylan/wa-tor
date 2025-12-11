@@ -21,49 +21,39 @@ You should have now your environment specified in your CLI in parentheses.
 
 # macOS Setup Guide
 
-## Installation Steps
 
-### 1. Install Python 3.12
 
-Download and install Python 3.12 from the official website: [Python 3.12 macOS installer](https://www.python.org/downloads/)
-
-### 2. Create a Virtual Environment
-
-Navigate to the root of your project and create a virtual environment using Python 3.12:
+1. Download and install Python 3.12 from the official website: [Python 3.12 macOS installer](https://www.python.org/downloads/)
+2. Navigate to the root of your project and create a virtual environment using Python 3.12:
 
 ```bash
 python3.12 -m venv .venv
 ```
-
-### 3. Select the Python Interpreter
+3. Select the Python Interpreter
 
 Select the 3.12 interpreter in your IDE:
 - **VSCode**: Bottom-right corner
 - **IntelliJ/PyCharm**: Project Interpreter settings
-
-### 4. Activate the Virtual Environment
+4. Activate the Virtual Environment
 
 ```bash
 source .venv/bin/activate
 ```
-
-### 5. Verify Python Version
+5. Verify Python Version
 
 Check that you're using the correct Python version:
 
 ```bash
 python --version
 ```
-
-### 6. Install Dependencies
+6. Install Dependencies
 
 Install the required modules from the requirements file:
 
 ```bash
 pip install -r requirements.txt
 ```
-
-### 7. Confirmation
+7. Confirmation
 
 You should now see the environment name displayed in your terminal in parentheses (e.g., `(.venv)`), indicating that the virtual environment is active.
 
