@@ -8,8 +8,11 @@ __pycache__/
 # Pytest
 .pytest_cache/
 venv
+.venv
 
 # Database
 database_wator.db
-venv
+
+# For IntelliJ Users
+.idea
 
