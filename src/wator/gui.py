@@ -1,6 +1,4 @@
 from __future__ import annotations
-import random
-import time
 import pygame
 from typing import Union
 from .planet import Planet
@@ -37,6 +35,7 @@ class WatorGUI:
         self.button_text_color = (220, 230, 240)
 
         pygame.init()
+
         self.screen = pygame.display.set_mode((self.window_width, self.window_height))
         pygame.display.set_caption("Wa-Tor Simulation")
         self.clock = pygame.time.Clock()
@@ -200,12 +199,10 @@ class WatorGUI:
                 if entity is not None:                    
                     if type(entity) is Fish:
                         fish_count += 1
-                        fish_count += 1
                         sprite_rect = self.fish_sprite.get_rect(center=rect.center)
                         self.screen.blit(self.fish_sprite, sprite_rect)
                         
                     elif type(entity) is Shark:
-                        shark_count += 1
                         shark_count += 1
                         sprite_rect = self.shark_sprite.get_rect(center=rect.center)
                         self.screen.blit(self.shark_sprite, sprite_rect)
