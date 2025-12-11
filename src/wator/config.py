@@ -1,8 +1,8 @@
-grid_width = 30
-grid_height = 30
-number_fishes = 300
+grid_width = 60
+grid_height = 35
+number_fishes = 200
 number_sharks = 100
-fish_reproduction = 5
+fish_reproduction = 2
 shark_reproduction = 15
-shark_energy = 10
-shark_energy_gain = 3
+shark_energy = 7
+shark_energy_gain = 2

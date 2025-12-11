@@ -7,7 +7,7 @@ from .planet import Planet
 from .fish import Fish
 from .shark import Shark
 from .config import grid_width, grid_height, number_fishes, number_sharks
-from .database import create_database
+from .database import create_database, archive_simulation
 
 
 
