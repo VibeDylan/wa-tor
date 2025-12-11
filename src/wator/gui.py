@@ -6,7 +6,7 @@ from .fish import Fish
 from .shark import Shark
 from .config import grid_width, grid_height, number_fishes, number_sharks
 from .simulation import count_entities, place_entities, move_entities, get_entities
-from .database import display_history
+from .database import display_history, archive_simulation, create_database
 from pathlib import Path
 
 
@@ -70,6 +70,7 @@ class WatorGUI:
         self.showing_history = False
         self.simulation_ended = False  
         self.end_message_displayed = False 
+        create_database()
 
 
 
@@ -261,7 +262,11 @@ class WatorGUI:
                     should_continue = self.check_simulation_state()
                     
                     if not should_continue:
-                        self.simulation_active = False
+                        self.simulation_active = False        
+                        entities = get_entities(self.planet)
+                        shark_count, fish_count = count_entities(entities)
+                        archive_simulation(self.chronon, fish_count, shark_count)
+
                     else:
                         self.chronon += 1
                         entities = get_entities(self.planet)
@@ -279,5 +284,8 @@ class WatorGUI:
         print(f"Poissons finaux: {final_fish}")
         print(f"Requins finaux: {final_sharks}")
         print("=" * 60)
+
+        archive_simulation(self.chronon, final_fish, final_sharks)
+
         
         pygame.quit()
