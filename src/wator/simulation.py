@@ -176,5 +176,3 @@ def simulation():
     entities = get_entities(wator)
     start_simulation(wator, chronon, entities)
 
-
-simulation()
