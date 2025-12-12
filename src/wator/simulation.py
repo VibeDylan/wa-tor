@@ -1,6 +1,5 @@
 from __future__ import annotations
 import random
-import time
 
 from typing import Union
 from .planet import Planet
@@ -156,7 +155,6 @@ def start_simulation(planet: 'Planet', chronon: int, entities: list[Union[Fish, 
         entities = move_entities(planet, entities)
         display_grid(planet, chronon)
         sharks, fishes = count_entities(entities)
-        time.sleep(2)
     print("Number of chronons : ", chronon)
     archive_simulation(chronon, fishes, sharks)
 
@@ -178,3 +176,5 @@ def simulation():
     entities = get_entities(wator)
     start_simulation(wator, chronon, entities)
 
+
+simulation()
