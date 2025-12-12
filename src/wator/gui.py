@@ -1,6 +1,5 @@
 from __future__ import annotations
 import pygame
-from typing import Union
 from .planet import Planet
 from .fish import Fish
 from .shark import Shark
@@ -77,19 +76,14 @@ class WatorGUI:
     def check_simulation_state(self):
         entities = get_entities(self.planet)
         shark_count, fish_count = count_entities(entities)
-        
-        if self.simulation_active:
-            print(f"Chronon {self.chronon}: 🐟={fish_count} 🦈={shark_count}")
-        
+
         if fish_count == 0:
             if self.simulation_active:  
-                print("ARRÊT: Tous les poissons sont morts")
-            return False
+                return False
             
         if shark_count == 0:
             if self.simulation_active: 
-                print("ARRÊT: Tous les requins sont morts")
-            return False
+                return False
             
         return True
         
@@ -101,7 +95,6 @@ class WatorGUI:
             
             self.chronon = 0
             self.simulation_active = True
-            print("SIMULATION RESET")
 
 
     def display_history_interface(self):
@@ -218,10 +211,6 @@ class WatorGUI:
         
     def run(self):
         running = True
-        
-        print("=" * 60)
-        print("DÉMARRAGE DE LA SIMULATION WA-TOR")
-        print("=" * 60)
 
         while running:
             self.mouse_pos = pygame.mouse.get_pos()
@@ -235,14 +224,12 @@ class WatorGUI:
                         running = False
                     elif event.key == pygame.K_SPACE:
                         self.simulation_active = not self.simulation_active
-                        print(f"Simulation {'reprise' if self.simulation_active else 'en pause'}")
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1: 
                         self.mouse_clicked = True
                         
                         if self.buttons['pause'].collidepoint(self.mouse_pos):
                             self.simulation_active = not self.simulation_active
-                            print(f"Simulation {'reprise' if self.simulation_active else 'en pause'}")
                         elif self.buttons['history'].collidepoint(self.mouse_pos):
                             self.showing_history = not self.showing_history
                         elif self.buttons['reset'].collidepoint(self.mouse_pos):
@@ -275,15 +262,9 @@ class WatorGUI:
 
             pygame.display.flip()
             self.clock.tick(self.fps)
-        
-        print("\n" + "=" * 60)
-        print("FIN DE LA SIMULATION")
-        print(f"Dernier chronon: {self.chronon}")
+
         final_entities = get_entities(self.planet)
         final_fish, final_sharks = count_entities(final_entities)
-        print(f"Poissons finaux: {final_fish}")
-        print(f"Requins finaux: {final_sharks}")
-        print("=" * 60)
 
         archive_simulation(self.chronon, final_fish, final_sharks)
 
