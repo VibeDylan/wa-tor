@@ -9,38 +9,6 @@ from .config import grid_width, grid_height, number_fishes, number_sharks
 from .database import create_database, archive_simulation
 
 
-
-def display_grid(planet: 'Planet', chronon: int) -> None:
-    """
-        Display the grid in the console, with Fish and Sharks.
-
-        Args:
-            planet (Planet): the planet
-            chronon (int): the chronon
-    """
-    print((planet.width*4+4)*"-")
-    print(f"Chronon {chronon} :")
-    print((planet.width*4+4)*"-")
-    print(f"  ", end="")
-    for j in range(planet.width):
-        print(f"| {j} ", end="")
-    print("| ")
-    print((planet.width*4+4)*"-")
-
-    for row in range(planet.height):
-        print(f"{row} ", end="")
-        for column in range(planet.width):
-            cell = planet.get(column, row)
-            if isinstance(cell, Shark):
-                print(f"|\U0001F988 ", end="")
-            elif isinstance(cell, Fish):
-                print(f"|\U0001F420 ", end="")
-            else:
-                print(f"| _ ", end="")
-        print("|")
-        print((planet.width*4+4)*"-")
-
-
 def get_free_positions(planet: 'Planet') -> list[tuple[int, int]]:
     """
         Get the positions who contain no sharks or fish.
@@ -120,7 +88,6 @@ def count_entities(entities: list[Union[Fish, Shark]]) -> tuple[int, int]:
     """
     sharks = sum(1 for entity in entities if type(entity) is Shark)
     fishes = sum(1 for entity in entities if type(entity) is Fish)
-    print(f"Shark : {sharks}, Fish : {fishes}")
     return sharks, fishes
 
 
@@ -153,9 +120,7 @@ def start_simulation(planet: 'Planet', chronon: int, entities: list[Union[Fish, 
     while sharks > 0 and fishes > 0:
         chronon += 1
         entities = move_entities(planet, entities)
-        display_grid(planet, chronon)
         sharks, fishes = count_entities(entities)
-    print("Number of chronons : ", chronon)
     archive_simulation(chronon, fishes, sharks)
 
 
@@ -171,7 +136,6 @@ def simulation():
     chronon = 0
 
     place_entities(wator, number_fishes, number_sharks)
-    display_grid(wator, chronon)
 
     entities = get_entities(wator)
     start_simulation(wator, chronon, entities)
