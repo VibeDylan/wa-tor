@@ -1,2 +1,15 @@
 TICKETS.md
 wator.py
+
+# Fichiers Python à ignorer
+__pycache__/
+*.pyc
+
+# Pytest
+.pytest_cache/
+venv
+.venv
+
+# For IntelliJ Users
+.idea
+
